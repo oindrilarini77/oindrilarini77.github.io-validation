@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>submit</title>
+    <link rel="stylesheet" href="submit.css">
+</head>
+<body>
+    <div class="container">
+<br><br>
+<div class="msg">
+    Thank you for your inquiry. A 4 digit verification number has been sent to your phone number: 
+
+</div>
+<div>
+    <label for="otp" class="otp">Enter OTP</label>
+    <input type="password" id="otp"><span id="otps" class="otps"></span>
+
+</div> 
+<br><br>
+<div>
+</div>
+<button onclick=showSubmit() type="button" id="sub" class="submit">Submit</button>
+</div>
+   
+</div>
+    <script>
+       valid = Math.floor(1000 + Math.random() * 9000);
+    document.write("your otp:  ", valid);
+
+
+let otpAttempts=0 
+    
+function showSubmit(){
+         
+  	    otp = document.getElementById("otp").value;
+        console.log("otp...."+otp)
+        console.log("valid..."+valid)
+
+	    if (otp==valid) {
+            window.location.href = "http://pixel6.co/"
+	    }
+	else {
+        otpAttempts=otpAttempts+1
+        if(otpAttempts===3){
+            window.location.href = "http://pixel6.co/404"
+        }
+        document.getElementById("otps").innerHTML = "**Please Enter valid otp";
+        return false;
+    }
+    
+    
+ }
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <link rel="stylesheet" href="index.css">
+
+
+
+
+</head>
+
+<body>
+    <p class="top">WELCOME TO PIXEL !!</p>
+
+    <form>
+        <div class="cont">
+            <br>
+
+            <div class="heading">REGISTER</div>
+            <br>
+            <div class="container">
+                <br><br>
+
+                <div>
+                    <input type="text" id="fname" class="name" size="80" oninput="return validateName(this)" height="50px"
+                        placeholder="Enter Your Full Name">
+                    <span id="fullname" class="fullname">
+                </div>
+                <br>
+                <div>
+                    <input type="email" id="email" class="email" size="80" onchange="validateEmail(email)"
+                        placeholder="Enter your E-mail address">
+                    <span id="emails" class="emails">
+                </div>
+                <br>
+
+                <div>
+                    <input type="tel" id="number" class="number" size="80" oninput="validateMobile(this.value)"
+                        placeholder="Enter Your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                    <p id="stateInfo"></p>
+
+                </div>
+                <br><br>
+                <button onclick="displayValues()" type="button" class="valid" id="valid">SUBMIT</button>
+            </div>
+        </div>
+        </div>
+
+    </form>
+
+
+    <script>
+
+        let sProvider, name, email
+        const data = [{ stateId: "01", statevalue: "ANDHRA PRADESH" }, { stateId: "02", statevalue: "ARUNACHAL PRADESH" },
+        { stateId: "03", statevalue: "ASSAM" }, { stateId: "04", statevalue: "BIHAR" }, { stateId: "5", statevalue: "CHHATISGARH" },
+        { stateId: "6", statevalue: "GOA" }, { stateId: "7", statevalue: "GUJRAT" }, { stateId: "8", statevalue: "HARYANA" },
+        { stateId: "9", statevalue: "HIMACHAL PRADESH" }, { stateId: "10", statevalue: "JHARKHAND" }, { stateId: "11", statevalue: "KARNATAKA" },
+        { stateId: "12", statevalue: "KERELA" }, { stateId: "13", statevalue: "MADHYA PRADESH" }, { stateId: "14", statevalue: "MAHARASHTRA" },
+        { stateId: "15", statevalue: "MANIPUR" }, { stateId: "16", statevalue: "MEGHALAYA" }, { stateId: "17", statevalue: "MIZORAM" }, 
+        { stateId: "18", statevalue: "NAGALAND" },
+            , { stateId: "19", statevalue: "ODISHA" }, { stateId: "20", statevalue: "PUNJAB" }, { stateId: "21", statevalue: "RAJASTHAN" },
+            , { stateId: "22", statevalue: "SIKKIM" }, { stateId: "23", statevalue: "TAMIL NADU" }, { stateId: "24", statevalue: "TELENGANA" }
+            , { stateId: "25", statevalue: "TRIPURA" }, { stateId: "26", statevalue: "UTTAR PRADESH" }, { stateId: "27", statevalue: "UTTARKHAND" }
+            , { stateId: "28", statevalue: "WEST BENGAL" }, { stateId: "29", statevalue: "ANDAMAN & NICOBAR" }, { stateId: "30", statevalue: "CHANDIGARH" }
+            , { stateId: "31", statevalue: "Dadra Nagar" }, { stateId: "32", statevalue: "DELHI" }, { stateId: "33", statevalue: "JAMMU & KASHMIR" }
+            , { stateId: "34", statevalue: "LADAKH" }, { stateId: "35", statevalue: "LAKSHADEEP" }, { stateId: "36", statevalue: "PUDUCHERRY" } 
+            ,{ stateId: "37", statevalue: "INVALID" },{ stateId: "38", statevalue: "INVALID" },{ stateId: "39", statevalue: "INVALID" }
+            ,{ stateId: "40", statevalue: "INVALID" },{ stateId: "41", statevalue: "INVALID" },{ stateId: "42", statevalue: "INVALID" }
+            ,{ stateId: "43", statevalue: "INVALID" },{ stateId: "44", statevalue: "INVALID" },{ stateId: "45", statevalue: "INVALID" }
+            ,{ stateId: "46", statevalue: "INVALID" },{ stateId: "47", statevalue: "INVALID" } ,{ stateId: "48", statevalue: "INVALID" },
+            { stateId: "49", statevalue: "INVALID" },{ stateId: "49", statevalue: "INVALID" },{ stateId: "50", statevalue: "INVALID" },
+            { stateId: "51", statevalue: "INVALID" },{ stateId: "52", statevalue: "INVALID" },{ stateId: "53", statevalue: "INVALID" }
+            ,{ stateId: "54", statevalue: "INVALID" },{ stateId: "55", statevalue: "INVALID" },{ stateId: "56", statevalue: "INVALID" }
+            ,{ stateId: "57", statevalue: "INVALID" },{ stateId: "58", statevalue: "INVALID" },{ stateId: "59", statevalue: "INVALID" }
+            ,{ stateId: "60", statevalue: "INVALID" },{ stateId: "61", statevalue: "INVALID" },{ stateId: "62", statevalue: "INVALID" }
+            ,{ stateId: "63", statevalue: "INVALID" },{ stateId: "64", statevalue: "INVALID" },{ stateId: "65", statevalue: "INVALID" }
+            ,{ stateId: "66", statevalue: "INVALID" },{ stateId: "67", statevalue: "INVALID" } ,{ stateId: "68", statevalue: "INVALID" }
+           , { stateId: "69", statevalue: "INVALID" },{ stateId: "70", statevalue: "INVALID" },{ stateId: "71", statevalue: "INVALID" }
+           ,{ stateId: "72", statevalue: "INVALID" },{ stateId: "73", statevalue: "INVALID" },{ stateId: "74", statevalue: "INVALID" }
+           ,{ stateId: "75", statevalue: "INVALID" },{ stateId: "76", statevalue: "INVALID" },{ stateId: "77", statevalue: "INVALID" },{ stateId: "78", statevalue: "INVALID" }
+            ,{ stateId: "79", statevalue: "INVALID" },{ stateId: "80", statevalue: "INVALID" },{ stateId: "81", statevalue: "INVALID" },{ stateId: "82", statevalue: "INVALID" }
+            ,{ stateId: "83", statevalue: "INVALID" },{ stateId: "84", statevalue: "INVALID" },{ stateId: "85", statevalue: "INVALID" }
+            ,{ stateId: "86", statevalue: "INVALID" },{ stateId: "87", statevalue: "INVALID" } ,{ stateId: "88", statevalue: "INVALID" }
+           , { stateId: "89", statevalue: "INVALID" },{ stateId: "90", statevalue: "INVALID" },{ stateId: "91", statevalue: "INVALID" }
+           ,{ stateId: "92", statevalue: "INVALID" },{ stateId: "93", statevalue: "INVALID" },{ stateId: "94", statevalue: "INVALID" }
+           ,{ stateId: "95", statevalue: "INVALID" },{ stateId: "96", statevalue: "INVALID" },{ stateId: "97", statevalue: "INVALID" }
+            ,{ stateId: "98", statevalue: "INVALID" },{ stateId: "99", statevalue: "INVALID" }]
+
+
+            
+
+        function validateName() {
+            fname.value = fname.value.
+    replace(/(^\s*)|(\s*$)/gi, "").
+    replace(/[ ]{2,}/gi, " "). 
+    replace(/\n +/, "\n");
+            name = document.getElementById("fname").value
+                   
+                   console.log(name)
+
+            var letters = /^[A-Za-z ]+$/;
+      if(name.match(letters))
+      {
+          document.getElementById('fullname').innerHTML = "";
+          return false;
+      }
+      else 
+      {
+        document.getElementById('fullname').innerHTML = "**Please Enter your Full Name";
+                return false;
+      }
+            
+           
+    return;
+        
+
+     }
+      
+
+     function validateEmail(email) {
+        
+     
+    
+         const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+             email = document.getElementById("email").value
+            if (email == '') {
+                document.getElementById('emails').innerHTML = "**Please Enter your Email id";
+                return false;
+            }else if(re.test(String(email).toLowerCase())){
+                document.getElementById('emails').innerHTML = "";
+                return true;
+            }
+            else {
+                document.getElementById('emails').innerHTML = "**Please Enter your Email id";
+                return false;
+            }    
+
+        }
+
+        const isNumericInput = (event) => {
+	const key = event.keyCode;
+	return ((key >= 48 && key <= 57) || 
+		(key >= 96 && key <= 105) 
+	);
+};
+
+const isModifierKey = (event) => {
+	const key = event.keyCode;
+	return (event.shiftKey === true || key === 35 || key === 36) || 
+
+        (key === 8 || key === 9 || key === 13 || key === 46) || 
+		(key > 36 && key < 41) || 
+		(
+			
+			(event.ctrlKey === true || event.metaKey === true) &&
+			(key === 65 || key === 67 || key === 86 || key === 88 || key === 90)
+		)
+};
+
+const enforceFormat = (event) => {
+	
+	if(!isNumericInput(event) && !isModifierKey(event)){
+		event.preventDefault();
+	}
+};
+
+const formatToPhone = (event) => {
+	if(isModifierKey(event)) {return;}
+
+	
+	const target = event.target;
+	const input = event.target.value.replace(/\D/g,'').substring(0,10); 
+	const zip = input.substring(0,3);
+	const middle = input.substring(3,6);
+	const last = input.substring(6,10);
+
+	if(input.length > 6){target.value = `(${zip}) - ${middle} - ${last}`;}
+	else if(input.length > 3){target.value = `(${zip}) ${middle}`;}
+	else if(input.length > 0){target.value = `(${zip}`;}
+};
+
+const inputElement = document.getElementById('number');
+inputElement.addEventListener('keydown',enforceFormat);
+inputElement.addEventListener('keyup',formatToPhone);
+
+
+
+
+       function displayValues() {
+
+            validateName()
+           let checkFlag= validateEmail()
+    
+           if(checkFlag){
+            let number = document.getElementById("number").value;
+             let mobRegex=/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/
+            let check=number.match(mobRegex)
+            //console.log(check)
+
+            if (number == '') {
+                document.getElementById('stateInfo').innerHTML = "**Please Enter 10 digit Mobile number";
+                return false;
+            }
+
+            else if (number.match(check)) {
+                return false;
+            }
+
+           
+            window.location.href = "https://oindrilarini77.github.io/oindrilarini77.github.io-validation/submit"
+        }
+           
+        }
+
+
+        function validateMobile(mobileNumber) {
+ 
+            let threeDigits = mobileNumber.substring(1, 4)
+            sProvider = checkServiceProvider(threeDigits)
+            let countryCode = mobileNumber.substring(6, 9)
+            console.log(countryCode);
+            console.log(threeDigits);
+
+            data.map((state) => {
+                if (state.stateId === countryCode) {
+                    document.getElementById("stateInfo").innerHTML = sProvider + "-" + state.statevalue
+                }
+            })
+        }
+
+
+        function between(x, min, max) {
+            return x >= min && x <= max;
+        }
+
+        function checkServiceProvider(threeDigits) {
+            if (between(threeDigits, 621, 799)) {
+                return "JIO"
+
+            }
+            if (between(threeDigits, 801, 920)) {
+                return "IDEA"
+            }
+            if (between(threeDigits, 921, 999)) {
+                return "VODAFONE"
+            }
+            return "Invalid"
+        }
+
+
+
+    </script>
+</body>
+</html>
